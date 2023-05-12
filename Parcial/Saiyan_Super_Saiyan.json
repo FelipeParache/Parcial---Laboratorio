@@ -1,0 +1,17 @@
+[
+    {
+        "nombre": "Goten",
+        "poder_de_ataque": "2800",
+        "habilidades": "Kamehameha + Tambor del Trueno"
+    },
+    {
+        "nombre": "Trunks",
+        "poder_de_ataque": "5200",
+        "habilidades": "Espada de energía + Ataque del futuro"
+    },
+    {
+        "nombre": "Goku",
+        "poder_de_ataque": "10000",
+        "habilidades": "Kamehameha + Genki Dama"
+    }
+]
