@@ -1,6 +1,6 @@
 from funciones_string import generar_separador
-from funciones_numericas import sanitizar_entero
 from funciones_string import generar_encabezado
+from funciones_numericas import sanitizar_entero
 from funciones_principales import obtener_datos
 from funciones_principales import listar_cantidad_por_raza
 from funciones_principales import listar_personajes_por_raza
@@ -8,6 +8,7 @@ from funciones_principales import listar_personajes_por_habilidad
 from funciones_principales import jugar_batalla
 from funciones_principales import guardar_json
 from funciones_principales import leer_json
+
 def imprimir_menu(path: str) -> None:
     '''
     Brief: Muestra en consola un menú con distintas opciones.

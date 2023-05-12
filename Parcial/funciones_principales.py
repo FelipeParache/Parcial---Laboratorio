@@ -51,6 +51,8 @@ def listar_cantidad_por_raza(lista: list) -> str:
         acumulador_razas -> Una cadena de caracteres que indica
         la cantidad de personajes que hay por cada raza en la lista.
     '''
+    if lista is None or len(lista) <= 0:
+        print("ERROR. Lista vacía o inexistente")
     raza_personajes = personajes_por_atributos(lista, 'raza')
     acumulador_texto_razas = ""
 
@@ -70,6 +72,8 @@ def listar_personajes_por_raza(lista: list) -> str:
         acumulador_texto_razas -> Una cadena de caracteres que representa
         información sobre el nombre y poder de ataque de cada personaje por raza.
     '''
+    if lista is None or len(lista) <= 0:
+        print("ERROR. Lista vacía o inexistente")
     raza_personajes = personajes_por_atributos(lista, 'raza')
     acumulador_texto_razas = ""
     acumulador_texto_nombre_ataque = ""
@@ -95,6 +99,9 @@ def listar_personajes_por_habilidad(lista: list) -> str:
         acumulador_texto_habilidad -> Una cadena de texto con los nombres de los personajes
         que poseen la habilidad ingresada junto con el promedio de su poder de ataque y pelea.
     '''
+    if lista is None or len(lista) <= 0:
+        print("ERROR. Lista vacía o inexistente")
+
     lista_habilidades = listar_atributos(lista, 'habilidades')
     acumulador_texto_habilidad = ""
 
@@ -122,6 +129,9 @@ def jugar_batalla(lista: list) -> str:
     Return:
         resultado -> Una cadena que indica el resultado de la batalla y la fecha en la que ocurrió.
     '''
+    if lista is None or len(lista) <= 0:
+        print("ERROR. Lista vacía o inexistente")
+
     fecha = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     lista_poder_ataque = listar_atributos(lista, 'poder_de_ataque')
     lista_nombres = listar_atributos(lista, 'nombre')
@@ -156,6 +166,9 @@ def guardar_json(lista: list) -> str:
     Return:
         nombre_json -> Un string que contiene el nombre del archivo json generado.
     '''
+    if lista is None or len(lista) <= 0:
+        print("ERROR. Lista vacía o inexistente")
+
     diccionario_json = listar_personajes_habilidad_json(lista)
 
     habilidad = re.sub(" ", "_", diccionario_json['ingreso_habilidad'])
@@ -167,7 +180,7 @@ def guardar_json(lista: list) -> str:
         json.dump(diccionario_json['personajes'], archivo_json, ensure_ascii = False, indent = 4)
 
         return nombre_json
-    
+
 def leer_json(path: str) -> None:
     '''
     Brief: Lee y muestra los datos de un archivo JSON que contiene

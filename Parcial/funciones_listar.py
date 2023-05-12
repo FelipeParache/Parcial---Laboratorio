@@ -65,6 +65,9 @@ def listar_personajes_habilidad_json(lista: list) -> dict:
         ingreso_raza -> La raza ingresada por el usuario.
         ingreso_habilidad -> La habilidad ingresada por el usuario.
     '''
+    if lista is None or len(lista) <= 0:
+        print("ERROR. Lista vacía o inexistente")
+        
     personajes = []
     separador = " + "
 
