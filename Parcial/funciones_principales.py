@@ -4,6 +4,7 @@ from datetime import datetime
 from funciones_listar import personajes_por_atributos
 from funciones_listar import listar_atributos
 from funciones_listar import listar_personajes_habilidad_json
+from funciones_listar import actualizar_habilidades_poderes_saiyan
 from funciones_numericas import promediar_ataque_pelea
 from funciones_batalla import usuario_elegir_personaje
 from funciones_batalla import maquina_elegir_personaje
@@ -198,3 +199,25 @@ def leer_json(path: str) -> None:
         habilidades = personaje['habilidades']
 
         print(f"\n* {nombre} - {poder_de_ataque} - {habilidades}")
+
+def guardar_csv_saiyans(lista: list) -> None:
+    '''
+    Brief:
+    Parameters:
+    Return:
+    '''
+    lista_saiyans_actualizados = actualizar_habilidades_poderes_saiyan(lista)
+    separador_razas = '-'
+    separador_habilidades = ' | '
+
+    if type(lista_saiyans_actualizados) is list and len(lista_saiyans_actualizados) > 0:
+
+        with open("saiyans_actualizados.csv", "a", encoding = "utf-8") as archivo_csv:
+
+            for personaje in lista_saiyans_actualizados:
+                linea = (f"{personaje['id']},{personaje['nombre']},"
+                         f"{separador_razas.join(personaje['raza'])},"
+                         f"{personaje['poder_de_pelea']},{personaje['poder_de_ataque']},"
+                         f"{separador_habilidades.join(personaje['habilidades'])}")
+
+                archivo_csv.writelines(f"{linea}\n")

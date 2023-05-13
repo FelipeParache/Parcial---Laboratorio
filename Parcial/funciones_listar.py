@@ -1,3 +1,5 @@
+from funciones_numericas import sanitizar_entero
+
 def personajes_por_atributos(lista: list, valor: str) -> list:
     '''
     Brief: Toma como entrada una lista de personajes y devuelve un diccionario
@@ -99,3 +101,93 @@ def listar_personajes_habilidad_json(lista: list) -> dict:
     return {'personajes': personajes,
             'ingreso_raza': ingreso_raza, 
             'ingreso_habilidad': ingreso_habilidad}
+
+def listar_saiyans(lista: list) -> list:
+    '''
+    Brief: Retorna una lista de todos los personajes de la raza Saiyan.
+    Parameters:
+        lista -> Una lista de diccionarios que representan personajes.
+    Return: Una lista de diccionarios, donde cada diccionario
+    representa un personaje de la raza Saiyan.
+    '''
+    if type(lista) is list and len(lista) > 0:
+        lista_saiyan = []
+        for personaje in lista:
+            for raza in personaje['raza']:
+                if raza == 'Saiyan':
+                    lista_saiyan.append(personaje)
+        return lista_saiyan
+    return []
+
+def aumento_de_poder_saiyans(lista: list) -> list:
+    '''
+    Brief: Toma una lista de personajes y devuelve
+    una lista con los aumentos de poder de pelea y ataque de los personajes con raza Saiyan.
+    Parameters:
+        lista -> Una lista de diccionarios que representan personajes.
+    Return: Una lista de dos listas que representan los aumentos
+    de poder de pelea y ataque de los personajes Saiyan.
+    '''
+    if type(lista) is list and len(lista) > 0:
+        lista_saiyan = listar_saiyans(lista)
+        aumentos_poder_pelea = []
+        aumentos_poder_ataque = []
+        for personaje in lista_saiyan:
+            aumento_poder_pelea = sanitizar_entero(personaje['poder_de_pelea']) * 1.5
+            aumento_poder_ataque = sanitizar_entero(personaje['poder_de_ataque']) * 1.7
+            aumentos_poder_pelea.append(str(aumento_poder_pelea))
+            aumentos_poder_ataque.append(str(aumento_poder_ataque))
+
+        return[aumentos_poder_pelea, aumentos_poder_ataque]
+    return []
+
+def transformacion_dios_saiyan(lista: list) -> list:
+    '''
+    Brief: Agrega la habilidad "Transformación nivel dios"
+    a la lista de habilidades de todos los personajes de raza Saiyan.
+    Parameters:
+        lista -> Una lista de diccionarios que representan personajes.
+    Return: Una lista que contiene las habilidades actualizadas de los Saiyans en listas.
+    '''
+    if type(lista) is list and len(lista) > 0:
+        lista_saiyan = listar_saiyans(lista)
+        habilidades_actualizadas = []
+        for personaje in lista_saiyan:
+            habilidades = personaje['habilidades']
+            habilidades.append("Transformación nivel dios")
+            habilidades_actualizadas.append(habilidades)
+        return habilidades_actualizadas
+    return []
+
+def actualizar_habilidades_poderes_saiyan(lista: list) -> list:
+    '''
+    Brief: Actualiza los poderes y habilidades de los personajes de la lista_saiyan,
+    incrementando su poder de pelea y poder de ataque en un 50% y 70% y
+    añadiendo la habilidad "Transformación nivel dios" a su lista de habilidades.
+    Parameters:
+        lista -> Una lista de diccionarios que representan personajes.
+    Return: Una lista con los personajes de raza Saiyan actualizados.
+    '''
+    if type(lista) and len(lista) > 0:
+        lista_saiyans_actualizados = []
+        lista_pelea = []
+        lista_ataque = []
+        lista_saiyan = listar_saiyans(lista)
+        lista_poderes_actualizados = aumento_de_poder_saiyans(lista)
+        lista_habilidades_actualizadas = transformacion_dios_saiyan(lista)
+
+        for pelea in lista_poderes_actualizados[0]:
+            lista_pelea.append(pelea)
+
+        for ataque in lista_poderes_actualizados[1]:
+            lista_ataque.append(ataque)
+
+        for i in range(len(lista_saiyan)):
+            personaje = lista_saiyan[i]
+            personaje['poder_de_pelea'] = lista_pelea[i]
+            personaje['poder_de_ataque'] = lista_ataque[i]
+            personaje['habilidades'] = lista_habilidades_actualizadas[i]
+            lista_saiyans_actualizados.append(personaje)
+
+        return lista_saiyans_actualizados
+    return []

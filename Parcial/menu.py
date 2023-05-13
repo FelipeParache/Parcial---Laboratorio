@@ -8,6 +8,7 @@ from funciones_principales import listar_personajes_por_habilidad
 from funciones_principales import jugar_batalla
 from funciones_principales import guardar_json
 from funciones_principales import leer_json
+from funciones_principales import guardar_csv_saiyans
 
 def imprimir_menu(path: str) -> None:
     '''
@@ -23,7 +24,8 @@ def imprimir_menu(path: str) -> None:
           "# 5 - Jugar batalla\n"
           "# 6 - Guardar JSON con personajes por raza y habilidad\n"
           "# 7 - Mostrar los personajes guardados en el JSON\n"
-          "# 8 - Salir del programa\n"
+          "# 8 - Mostrar aumento de poder Saiyan\n"
+          "# 9 - Salir del programa\n"
           f"{generar_separador('-', 60)}")
 
 def dbz_menu_principal(path: str) -> int:
@@ -58,7 +60,7 @@ def dbz_app(path: str) -> None:
     path_json = ""
     respuesta = dbz_menu_principal(path_json)
 
-    while respuesta != 8:
+    while respuesta != 9:
 
         match(respuesta):
             case 1:
@@ -83,7 +85,8 @@ def dbz_app(path: str) -> None:
                 generar_encabezado("7: Mostrar los personajes guardados en el JSON")
                 leer_json(path_json)
             case 8:
-                break
+                generar_encabezado("8: Generar CSV con los Saiyans actualizados")
+                guardar_csv_saiyans(datos_obtenidos)
             case _:
                 generar_encabezado("ERROR. No existe ese dato")
 
