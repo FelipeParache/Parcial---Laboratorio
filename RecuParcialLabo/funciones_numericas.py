@@ -36,9 +36,28 @@ def promediar_ataque_pelea(personaje: dict) -> float:
         'poder_de_ataque' y 'poder_de_pelea' del personaje.
     '''
     suma_ataque_pelea = 0
-    poder_ataque = sanitizar_entero(personaje['poder_de_ataque'])
-    poder_pelea = sanitizar_entero(personaje['poder_de_pelea'])
+    poder_ataque = personaje['poder_de_ataque']
+    poder_pelea = personaje['poder_de_pelea']
     suma_ataque_pelea = poder_ataque + poder_pelea
 
     promedio_poder_ataque_pelea = suma_ataque_pelea / 2
     return promedio_poder_ataque_pelea
+
+def determinar_valor_maximo(poder_de_pelea: int, poder_de_ataque: int) -> str:
+    '''
+    Brief: Determina el valor máximo entre el poder de pelea y 
+    el poder de ataque de un personaje.
+    Parameters:
+        poder_de_pelea -> Entero que representa el poder de pelea del personaje.
+        poder_de_ataque -> Entero que representa el poder de ataque del personaje.
+    Return:
+        valor -> El valor máximo de poder de pelea o ataque con su letra según corresponda.
+    '''
+    valor = ''
+    if poder_de_ataque > poder_de_pelea:
+        valor = f'D-{poder_de_ataque}'
+    elif poder_de_ataque < poder_de_pelea:
+        valor = f'A-{poder_de_pelea}'
+    else:
+        valor = f'AD-{poder_de_pelea}'
+    return valor

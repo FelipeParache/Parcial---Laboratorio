@@ -1,23 +1,16 @@
-from funciones_string import generar_separador
-from funciones_string import generar_encabezado
+from os import system
+from funciones_string import *
 from funciones_numericas import sanitizar_entero
-from funciones_principales import obtener_datos
-from funciones_principales import listar_cantidad_por_raza
-from funciones_principales import listar_personajes_por_raza
-from funciones_principales import listar_personajes_por_habilidad
-from funciones_principales import jugar_batalla
-from funciones_principales import guardar_json
-from funciones_principales import leer_json
-from funciones_principales import guardar_csv_saiyans
+from funciones_principales import *
 
 def imprimir_menu(path: str) -> None:
     '''
     Brief: Muestra en consola un menú con distintas opciones.
     Parameters: 
-        path -> Ruta del archivo que se usa en la opción 1 del menú.
+        path -> Ruta del archivo CSV que contiene los datos de los personajes.
     '''
     print("\nMENU DRAGON BALL Z:\n"
-          f"# 1 - Traer datos desde el archivo: {path}\n"
+          f"# DATOS YA OBTENIDOS {path}\n"
           "# 2 - Listar cantidad por raza\n"
           "# 3 - Listar personajes por raza\n"
           "# 4 - Listar personajes por habilidad\n"
@@ -25,8 +18,10 @@ def imprimir_menu(path: str) -> None:
           "# 6 - Guardar JSON con personajes por raza y habilidad\n"
           "# 7 - Mostrar los personajes guardados en el JSON\n"
           "# 8 - Mostrar aumento de poder Saiyan\n"
-          "# 9 - Salir del programa\n"
-          f"{generar_separador('-', 60)}")
+          "# 9 - Ordenar de menor a mayor o viceversa los personajes por atributo\n"
+          "# 10 - Generar y mostrar el codigo de cada uno de los personajes\n"
+          "# 11 - Salir del programa\n"
+          f"{generar_separador('-', 75)}")
 
 def dbz_menu_principal(path: str) -> int:
     '''
@@ -34,7 +29,7 @@ def dbz_menu_principal(path: str) -> int:
     ingresando un número de la lista.
     Luego, devuelve la opción elegida como un entero.
     Parameters:
-        path -> Ruta del archivo que se usa en la opción 1 del menú.
+        path -> Ruta del archivo CSV que contiene los datos de los personajes.
     Return:
         int -> Un entero que representa la opción elegida por el usuario en el menú.
         -1 -> Si el usuario ingresó un valor no numérico. 
@@ -52,20 +47,25 @@ def dbz_menu_principal(path: str) -> int:
 
 def dbz_app(path: str) -> None:
     '''
-    Brief: Recibe una lista y segun la respuesta del usuario, muestra una parte del programa
+    Brief: Programa de base de datos de personajes de Dragon Ball Z.
+    Permite cargar los datos desde un archivo CSV,
+    realizar consultas y acciones como guardar los datos en un archivo JSON o generar un CSV.
     Parameters:
-        lista_heroes -> lista sobre la cual voy a hacer la busqueda
-    Return: None
+        path -> Ruta del archivo CSV que contiene los datos de los personajes.
     '''
     path_json = ""
-    respuesta = dbz_menu_principal(path_json)
+    respuesta = ""
 
-    while respuesta != 9:
+    while respuesta != 1:
+        respuesta = sanitizar_entero(input("Ingrese el número 1 para cargar los datos: "))
 
+    generar_encabezado("1: Datos obtenidos con éxito")
+    datos_obtenidos = obtener_datos(path)
+
+    while respuesta != 11:
+        respuesta = dbz_menu_principal(path_json)
+        system('clear')
         match(respuesta):
-            case 1:
-                generar_encabezado("1: Datos obtenidos con éxito")
-                datos_obtenidos = obtener_datos(path)
             case 2:
                 generar_encabezado("2: Listar cantidad por raza")
                 listar_cantidad_por_raza(datos_obtenidos)
@@ -87,7 +87,17 @@ def dbz_app(path: str) -> None:
             case 8:
                 generar_encabezado("8: Generar CSV con los Saiyans actualizados")
                 guardar_csv_saiyans(datos_obtenidos)
+            case 9:
+                prompt_usuario = ususario_ingreso_atributo()
+                generar_encabezado(f"9: Lista de personajes ordenada por {prompt_usuario[0]}")
+                ordenar_personajes_por_atributo(datos_obtenidos, prompt_usuario[0], prompt_usuario[1])
+            case 10:
+                generar_encabezado("10: Lista de personajes actualizada con los codigos")
+                agregar_codigos_personajes(datos_obtenidos)
             case _:
-                generar_encabezado("ERROR. No existe ese dato")
-
-        respuesta = dbz_menu_principal(path_json)
+                if respuesta == 11:
+                    pass
+                elif respuesta == 1:
+                    generar_encabezado("1: Datos ya obtenidos")
+                else:
+                    generar_encabezado("ERROR. No existe ese dato")

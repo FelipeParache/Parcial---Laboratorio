@@ -1,14 +1,10 @@
 import re
 import json
 from datetime import datetime
-from funciones_listar import personajes_por_atributos
-from funciones_listar import listar_atributos
-from funciones_listar import listar_personajes_habilidad_json
-from funciones_listar import actualizar_habilidades_poderes_saiyan
-from funciones_numericas import promediar_ataque_pelea
-from funciones_batalla import usuario_elegir_personaje
-from funciones_batalla import maquina_elegir_personaje
-from funciones_batalla import registrar_batalla
+from funciones_listar import *
+from funciones_numericas import *
+from funciones_batalla import *
+from funciones_string import generar_codigo_personaje
 
 def obtener_datos(path: str) -> list:
     '''
@@ -27,7 +23,7 @@ def obtener_datos(path: str) -> list:
         for line in archivo:
             line_personaje = re.split(",|\n", line)
             personaje = {}
-            personaje["id"] = line_personaje[0].strip()
+            personaje["id"] = sanitizar_entero(line_personaje[0].strip())
             personaje["nombre"] = line_personaje[1].strip()
             personaje["raza"] = line_personaje[2]
             if personaje["raza"] in razas_excluidas:
@@ -35,8 +31,8 @@ def obtener_datos(path: str) -> list:
             else:
                 personaje["raza"] = re.split(
                     r"\-", line_personaje[2].strip())
-            personaje["poder_de_pelea"] = line_personaje[3].strip()
-            personaje["poder_de_ataque"] = line_personaje[4].strip()
+            personaje["poder_de_pelea"] = sanitizar_entero(line_personaje[3].strip())
+            personaje["poder_de_ataque"] = sanitizar_entero(line_personaje[4].strip())
             personaje["habilidades"] = re.split(
                 r"\s\|\$\%|\|\$\%", line_personaje[5].strip())
             lista_personajes.append(personaje)
@@ -202,9 +198,9 @@ def leer_json(path: str) -> None:
 
 def guardar_csv_saiyans(lista: list) -> None:
     '''
-    Brief:
+    Brief: Guarda los datos actualizados de los personajes de raza Saiyan en un archivo CSV.
     Parameters:
-    Return:
+        lista -> Una lista de diccionarios que representan personajes.
     '''
     lista_saiyans_actualizados = actualizar_habilidades_poderes_saiyan(lista)
     separador_razas = '-'
@@ -221,3 +217,38 @@ def guardar_csv_saiyans(lista: list) -> None:
                          f"{separador_habilidades.join(personaje['habilidades'])}")
 
                 archivo_csv.writelines(f"{linea}\n")
+
+def ordenar_personajes_por_atributo(lista: list, atributo: str, ascendente: bool) -> None:
+    '''
+    Brief: Ordena la lista de personajes por un atributo específico y muestra los personajes en orden ascendente o descendente.
+    Parameters:
+        lista -> Una lista de diccionarios que representan personajes.
+        atributo -> El atributo por el cual se ordenará la lista.
+        ascendente -> Indica si la lista se debe ordenar en forma ascendente (True) o descendente (False).
+    '''
+    if type(lista) is list and len(lista) > 0:
+        ordenamiento_personajes(lista, atributo)
+
+        if not ascendente:
+            lista.reverse()
+
+        for personaje in lista:
+            print(f"\nID: {personaje['id']} - "
+                f"NOMBRE: {personaje['nombre']} - "
+                f"RAZA: {personaje['raza']} - "
+                f"PELEA: {personaje['poder_de_pelea']} - "
+                f"ATAQUE: {personaje['poder_de_ataque']} - "
+                f"HABILIDAD: {personaje['habilidades']}")
+
+def agregar_codigos_personajes(lista: list) -> None:
+    '''
+    Brief: Agrega los códigos generados a los personajes de la lista
+    como una nueva clave en el diccionario.
+    Parameters:
+        lista -> Una lista de diccionarios que representan personajes.
+    '''
+    if type(lista) is list and len(lista) > 0:
+        for personaje in lista:
+            codigo_personaje = generar_codigo_personaje(personaje)
+            personaje['codigo'] = codigo_personaje
+            print(f"{personaje}\n")

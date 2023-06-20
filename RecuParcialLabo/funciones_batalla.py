@@ -1,5 +1,4 @@
 import random
-from funciones_numericas import sanitizar_entero
 
 def usuario_elegir_personaje(lista_nombres: list, lista_poder: list) -> list:
     '''
@@ -15,14 +14,14 @@ def usuario_elegir_personaje(lista_nombres: list, lista_poder: list) -> list:
         list -> Lista con el nombre del personaje elegido y su poder de ataque.
     '''
     if len(lista_nombres) > 0 and len(lista_poder) > 0:
-        personaje_elegido = input("Ingrese su personaje: ")
+        personaje_elegido = input("Ingrese su personaje: ").capitalize()
         while personaje_elegido not in lista_nombres:
             personaje_elegido = input(
                 "ERROR: El personaje ingresado no se encuentra en la lista de personajes."
-                " Ingrese su personaje nuevamente: ")
+                " Ingrese su personaje nuevamente: ").capitalize()
 
         index_elegido = lista_nombres.index(personaje_elegido)
-        poder_elegido = sanitizar_entero(lista_poder[index_elegido])
+        poder_elegido = lista_poder[index_elegido]
         print(f"\n* Elegiste a {personaje_elegido} con un poder de ataque de {poder_elegido}.\n")
         return [personaje_elegido, poder_elegido]
     return []
@@ -42,7 +41,7 @@ def maquina_elegir_personaje(lista_nombres: list, lista_poder: list) -> list:
     if len(lista_nombres) > 0 and len(lista_poder) > 0:
         personaje_maquina = random.choice(lista_nombres)
         index_maquina = lista_nombres.index(personaje_maquina)
-        maquina_poder = sanitizar_entero(lista_poder[index_maquina])
+        maquina_poder = lista_poder[index_maquina]
         print(f"* La máquina eligió a {personaje_maquina} con un poder de ataque de {maquina_poder}.\n")
         return [personaje_maquina, maquina_poder]
     return []

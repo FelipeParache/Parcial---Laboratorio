@@ -1,5 +1,3 @@
-from funciones_numericas import sanitizar_entero
-
 def personajes_por_atributos(lista: list, valor: str) -> list:
     '''
     Brief: Toma como entrada una lista de personajes y devuelve un diccionario
@@ -59,7 +57,7 @@ def listar_personajes_habilidad_json(lista: list) -> dict:
     el ingreso de una habilidad y una raza. Luego retorna un diccionario
     con una lista de los personajes que tienen la habilidad y raza ingresadas
     con su poder de ataque y habilidades, sin incluir la habilidad ingresada.
-    Prameters
+    Prameters:
         lista -> Una lista de diccionarios que representan personajes.
     Return: Un diccionario con los siguientes valores:
         personajes -> Una lista de diccionarios que representan
@@ -69,21 +67,21 @@ def listar_personajes_habilidad_json(lista: list) -> dict:
     '''
     if lista is None or len(lista) <= 0:
         print("ERROR. Lista vacía o inexistente")
-        
+
     personajes = []
     separador = " + "
 
     lista_habilidades = personajes_por_atributos(lista, 'habilidades')
     lista_raza = personajes_por_atributos(lista, 'raza')
 
-    ingreso_habilidad = input("Ingrese una habilidad de algun personaje de DBZ: ")
+    ingreso_habilidad = input("Ingrese una habilidad de algun personaje de DBZ: ").capitalize()
     while ingreso_habilidad not in lista_habilidades:
         ingreso_habilidad = input(
-            "ERROR: no se encuentra en la lista. Ingrese una habilidad nuevamente: ")
+            "ERROR: no se encuentra en la lista. Ingrese una habilidad nuevamente: ").capitalize()
 
-    ingreso_raza = input("Ingrese la raza de algun personaje de DBZ: ")
+    ingreso_raza = input("Ingrese la raza de algun personaje de DBZ: ").capitalize()
     while ingreso_raza not in lista_raza:
-        ingreso_raza = input("ERROR: no se encuentra en la lista. Ingrese una raza nuevamente: ")
+        ingreso_raza = input("ERROR: no se encuentra en la lista. Ingrese una raza nuevamente: ").capitalize()
 
     for personaje in lista:
         if ingreso_habilidad in personaje['habilidades'] and ingreso_raza in personaje['raza']:
@@ -133,8 +131,8 @@ def aumento_de_poder_saiyans(lista: list) -> list:
         aumentos_poder_pelea = []
         aumentos_poder_ataque = []
         for personaje in lista_saiyan:
-            aumento_poder_pelea = sanitizar_entero(personaje['poder_de_pelea']) * 1.5
-            aumento_poder_ataque = sanitizar_entero(personaje['poder_de_ataque']) * 1.7
+            aumento_poder_pelea = personaje['poder_de_pelea'] * 1.5
+            aumento_poder_ataque = personaje['poder_de_ataque'] * 1.7
             aumentos_poder_pelea.append(str(aumento_poder_pelea))
             aumentos_poder_ataque.append(str(aumento_poder_ataque))
 
@@ -191,3 +189,17 @@ def actualizar_habilidades_poderes_saiyan(lista: list) -> list:
 
         return lista_saiyans_actualizados
     return []
+
+def ordenamiento_personajes(lista: list, atributo: str) -> None:
+    '''
+    Brief: Ordena la lista de personajes en base a un atributo específico.
+    Parameters:
+        lista -> Una lista de diccionarios que representan personajes.
+        atributo -> El atributo por el cual se ordenará la lista.
+    '''
+    for i in range(len(lista) - 1):
+        for j in range(i + 1, len(lista)):
+            if lista[i][atributo] > lista[j][atributo]:
+                aux = lista[i]
+                lista[i] = lista[j]
+                lista[j] = aux
