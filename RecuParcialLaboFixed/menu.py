@@ -1,3 +1,9 @@
+# pylint: disable=wildcard-import
+# pylint: disable=unused-wildcard-import
+# pylint: disable=consider-using-enumerate
+# pylint: disable=unidiomatic-typecheck
+# pylint: disable=missing-module-docstring
+# pylint: disable=line-too-long
 from os import system
 from funciones_string import *
 from funciones_numericas import sanitizar_entero
@@ -83,7 +89,10 @@ def dbz_app(path: str) -> None:
                 path_json = guardar_json(datos_obtenidos)
             case 7:
                 generar_encabezado("7: Mostrar los personajes guardados en el JSON")
-                leer_json(path_json)
+                try:
+                    leer_json(path_json)
+                except FileNotFoundError:
+                    generar_encabezado("Error, archivo inexistente. Genere el json antes de mostrarlo")
             case 8:
                 generar_encabezado("8: Generar CSV con los Saiyans actualizados")
                 guardar_csv_saiyans(datos_obtenidos)

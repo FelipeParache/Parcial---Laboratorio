@@ -1,5 +1,9 @@
-import re
-from functools import reduce
+# pylint: disable=wildcard-import
+# pylint: disable=unused-wildcard-import
+# pylint: disable=consider-using-enumerate
+# pylint: disable=unidiomatic-typecheck
+# pylint: disable=missing-module-docstring
+# pylint: disable=line-too-long
 from funciones_numericas import determinar_valor_maximo
 
 def generar_separador(patron: str, largo: int, imprimir = True) -> str:

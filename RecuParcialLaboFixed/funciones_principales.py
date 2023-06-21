@@ -1,3 +1,9 @@
+# pylint: disable=wildcard-import
+# pylint: disable=unused-wildcard-import
+# pylint: disable=consider-using-enumerate
+# pylint: disable=unidiomatic-typecheck
+# pylint: disable=missing-module-docstring
+# pylint: disable=line-too-long
 import re
 import json
 from datetime import datetime

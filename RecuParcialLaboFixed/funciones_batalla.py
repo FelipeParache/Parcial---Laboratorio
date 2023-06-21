@@ -1,3 +1,9 @@
+# pylint: disable=wildcard-import
+# pylint: disable=unused-wildcard-import
+# pylint: disable=consider-using-enumerate
+# pylint: disable=unidiomatic-typecheck
+# pylint: disable=missing-module-docstring
+# pylint: disable=line-too-long
 import random
 
 def usuario_elegir_personaje(lista_nombres: list, lista_poder: list) -> list:

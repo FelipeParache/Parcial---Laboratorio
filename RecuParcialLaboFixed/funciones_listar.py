@@ -1,3 +1,9 @@
+# pylint: disable=wildcard-import
+# pylint: disable=unused-wildcard-import
+# pylint: disable=consider-using-enumerate
+# pylint: disable=unidiomatic-typecheck
+# pylint: disable=missing-module-docstring
+# pylint: disable=line-too-long
 def personajes_por_atributos(lista: list, valor: str) -> list:
     '''
     Brief: Toma como entrada una lista de personajes y devuelve un diccionario
@@ -8,8 +14,8 @@ def personajes_por_atributos(lista: list, valor: str) -> list:
         valor -> Un string que representa la característica
         por la cual se van a listar los personajes.
     Return:
-        lista_atributos -> un diccionario donde cada clave es un atributo y
-        el valor es una lista de los personajes que pertenecen a esa atributo.
+        lista_atributos_personaje -> un diccionario donde cada clave es un atributo y
+        el valor es una lista de los personajes que pertenecen a ese atributo.
     '''
     if type(lista) is list and len(lista) > 0:
         lista_atributos_personaje = {}
@@ -71,8 +77,8 @@ def listar_personajes_habilidad_json(lista: list) -> dict:
     personajes = []
     separador = " + "
 
-    lista_habilidades = personajes_por_atributos(lista, 'habilidades')
-    lista_raza = personajes_por_atributos(lista, 'raza')
+    lista_habilidades = listar_atributos(lista, 'habilidades')
+    lista_raza = listar_atributos(lista, 'raza')
 
     ingreso_habilidad = input("Ingrese una habilidad de algun personaje de DBZ: ").capitalize()
     while ingreso_habilidad not in lista_habilidades:
@@ -81,7 +87,8 @@ def listar_personajes_habilidad_json(lista: list) -> dict:
 
     ingreso_raza = input("Ingrese la raza de algun personaje de DBZ: ").capitalize()
     while ingreso_raza not in lista_raza:
-        ingreso_raza = input("ERROR: no se encuentra en la lista. Ingrese una raza nuevamente: ").capitalize()
+        ingreso_raza = input("ERROR: no se encuentra en la lista."
+                             "Ingrese una raza nuevamente: ").capitalize()
 
     for personaje in lista:
         if ingreso_habilidad in personaje['habilidades'] and ingreso_raza in personaje['raza']:
