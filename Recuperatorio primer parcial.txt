@@ -1,11 +1,12 @@
-﻿Recuperatorio primer parcial
+﻿Recuperatorio primer parcial. Laboratorio 1.
 
 
 Nombre y apellido: Felipe Parache
-Materia: Laboratorio
+Materia: Laboratorio de Computación 1
 DNI: 43631515
-Tutor: Giovanni
+Tutor: Giovanni Lucchetta
 División: 1D
+Email: soyfelipepe@gmail.com
 
 
-Link al video: https://youtu.be/IXTFDcVUMQ4
+Link al video: https://www.youtube.com/watch?v=IXTFDcVUMQ4
