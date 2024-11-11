@@ -1,6 +1,6 @@
-# Proyecto de Simulación de Batallas - Dragon Ball Z
+# Simulación de Batallas - Dragon Ball Z
 
-Este repositorio contiene un programa desarrollado en Python que simula batallas entre personajes de la serie Dragon Ball Z. El proyecto permite cargar datos de personajes desde un archivo CSV, realizar diversas consultas y acciones, y simular batallas entre el usuario y la máquina.
+Programa desarrollado en Python que simula batallas entre personajes de la serie Dragon Ball Z. El proyecto permite cargar datos de personajes desde un archivo CSV, realizar diversas consultas y acciones, y simular batallas entre el usuario y la máquina.
 
 ## Descripción del Proyecto
 
@@ -9,7 +9,6 @@ El programa permite a los usuarios interactuar con un menú para:
 - Calcular promedios de poder de ataque y pelea.
 - Jugar batallas entre personajes elegidos por el usuario y la máquina.
 - Guardar datos en formato JSON y CSV.
-- Generar códigos únicos para los personajes.
 
 ## Estructura del Proyecto
 
@@ -31,26 +30,6 @@ El programa permite a los usuarios interactuar con un menú para:
 6. **Ordenar Personajes**: Permite ordenar la lista de personajes por diferentes atributos.
 7. **Generar Códigos de Personajes**: Asigna códigos únicos a cada personaje basado en su información.
 
-## Cómo Ejecutar
-
-1. Clona este repositorio en tu máquina local.
-2. Asegúrate de tener Python 3.x instalado.
-3. Ejecuta `main.py` para iniciar el programa.
-4. Sigue las instrucciones en pantalla para interactuar con el menú.
-
-## Requisitos
-
-- Python 3.x
-- Bibliotecas estándar de Python
-
-## Contribuciones
-
-Las contribuciones son bienvenidas. Si deseas mejorar el proyecto o añadir nuevas características, por favor abre un issue o envía un pull request.
-
 ## Ejemplo de Uso
 
 Al ejecutar el programa, se presentará un menú con varias opciones. Por ejemplo, al elegir la opción para listar personajes por raza, el programa mostrará la cantidad de personajes de cada raza disponible en el archivo CSV.
-
----
-
-Este README proporciona una visión clara del proyecto, su propósito, y cómo puede ser ejecutado, facilitando su comprensión y uso por otros desarrolladores o evaluadores. ¡Espero que te sea útil!
